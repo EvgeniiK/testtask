@@ -14,6 +14,8 @@
   <dd><%= @book.shortdesc %></dd>
   <dt><strong><%= model_class.human_attribute_name(:genres) %>:</strong></dt>
   <dd><%= @book.genres.pluck(:name).join(', ') %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:cover) %>:</strong></dt>
+  <dd><%= image_tag @book.cover.url(:medium) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:draft) %>:</strong></dt>
   <dd><%= @book.draft %></dd>
 </dl>
