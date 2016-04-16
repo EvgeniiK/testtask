@@ -12,6 +12,8 @@
   <dd><%= @book.author %></dd>
   <dt><strong><%= model_class.human_attribute_name(:shortdesc) %>:</strong></dt>
   <dd><%= @book.shortdesc %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:genres) %>:</strong></dt>
+  <dd><%= @book.genres.pluck(:name).join(', ') %></dd>
   <dt><strong><%= model_class.human_attribute_name(:draft) %>:</strong></dt>
   <dd><%= @book.draft %></dd>
 </dl>

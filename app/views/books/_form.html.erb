@@ -8,6 +8,16 @@
   <%= f.input :draft %>
   <%= error_span(@book[:draft]) %>
 
+  <div class="form-group">
+    Genres:
+    <% Genre.all.each do |genre| %>
+      <label>
+        <%= check_box_tag "book[genre_ids][]", genre.id, f.object.genres.include?(genre) %>
+        <%= genre.name %>
+      </label>
+    <% end %>
+  </div>
+
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 books_path, :class => 'btn btn-default' %>
