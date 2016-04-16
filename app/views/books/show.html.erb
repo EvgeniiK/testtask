@@ -1,29 +1,27 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Book -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>User:</strong>
-  <%= @book.user %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @book.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @book.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:author) %>:</strong></dt>
+  <dd><%= @book.author %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:shortdesc) %>:</strong></dt>
+  <dd><%= @book.shortdesc %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:draft) %>:</strong></dt>
+  <dd><%= @book.draft %></dd>
+</dl>
 
-<p>
-  <strong>Name:</strong>
-  <%= @book.name %>
-</p>
-
-<p>
-  <strong>Author:</strong>
-  <%= @book.author %>
-</p>
-
-<p>
-  <strong>Shortdesc:</strong>
-  <%= @book.shortdesc %>
-</p>
-
-<p>
-  <strong>Draft:</strong>
-  <%= @book.draft %>
-</p>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              books_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_book_path(@book), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              book_path(@book),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
