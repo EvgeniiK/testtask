@@ -1,6 +1,4 @@
 <%= simple_form_for @book, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :user_id %>
-  <%= error_span(@book[:user_id]) %>
   <%= f.input :name %>
   <%= error_span(@book[:name]) %>
   <%= f.input :author %>

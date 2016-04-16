@@ -1,15 +1,26 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index]
+  before_action :check_user, only: [:edit, :update, :destroy]
   respond_to :html
 
   def index
-    @books = Book.all
+    @books = Book.where('created_at > ?', Time.now - 1.week).where(draft: false)
     respond_with(@books)
   end
 
+  def drafts
+    @books = Book.where(user_id: current_user.id).where(draft: true)
+    render :index
+  end
+
+
   def show
-    respond_with(@book)
+    if @book.draft?
+      respond_with(@book) unless check_user
+    else
+      respond_with(@book)
+    end
   end
 
   def new
@@ -21,7 +32,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(book_params)
+    @book = Book.new(book_params.merge(user_id: current_user.id))
     @book.save
     respond_with(@book)
   end
@@ -42,6 +53,10 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:user_id, :name, :author, :shortdesc, :draft)
+      params.require(:book).permit(:name, :author, :shortdesc, :draft)
+    end
+
+    def check_user
+      redirect_to(root_path) unless current_user.id == @book.user_id 
     end
 end
