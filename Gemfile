@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
-
+ruby "2.2.4"
 gem 'devise'
 gem 'twitter-bootstrap-rails', '3.2.0'
 gem 'simple_form'
 gem 'paperclip'
+
+gem 'rails_12factor'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.7'
 # Use sqlite3 as the database for Active Record
